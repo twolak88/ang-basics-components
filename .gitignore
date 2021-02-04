@@ -44,3 +44,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+######################
+# NetBeans
+######################
+/nbproject/private/
+/nbactions.xml
+/nb-configuration.xml
+/licenseheader.txt
+/nbproject/
