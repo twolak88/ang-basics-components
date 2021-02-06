@@ -11,31 +11,49 @@
     class="form-control"
     [(ngModel)]="serverName"
     [disabled]="!allowNewServer"/>
+  <p class="alert alert-danger" 
+     *ngIf='!serverName'>Server name can't be empty.</p>
   <input
     type="test"
     class="form-control"
     [(ngModel)]="serverHost"
     [disabled]="!allowNewServer"/>
+  <p class="alert alert-danger" 
+     *ngIf='!serverHost'>Server host can't be empty.</p>
   <input
     type="test"
     class="form-control"
     [(ngModel)]="serverPort"
     [disabled]="!allowNewServer"/>
-  <!--<p>Current name: {{ serverName }}</p>-->
+  <p class="alert alert-danger" 
+     *ngIf='!serverPort'>Server port can't be empty.</p>
   <button class="btn btn-primary" 
           [disabled]="!allowNewServer || !serverName || !serverHost || !serverPort"
           (click)="onCreateServer()"
-          (mouseover)="onMouseOver()"
-          (mouseout)="onMouseOut()">Add Server</button>
+          (mouseover)="mouseOver = true"
+          (mouseout)="mouseOver = false">Add Server</button>
   <button class="btn btn-primary"
-          (click)="resetControls()"
-          [disabled]="!allowNewServer || (serverName === DEFAULT_NAME && serverHost == DEFAULT_HOST && serverPort == DEFAULT_PORT)">
-    Reset</button>
+          (click)="setDefaults()"
+          [disabled]="isSetDefaultsEnabled()">Defaults</button>
   <button class="btn btn-primary" 
-          [disabled]="!allowNewServer || !serverName && !serverHost && !serverPort"
-          (click)="serverName = serverHost = serverPort = ''">Clear</button>
-  <!--<p [innerText]="allowNewServer">allowNewServer</p>-->
-  <p>{{ serverCreationStatus }}</p>
+          [disabled]="isClearEnabled()"
+          (click)="clearControls()">Clear</button>
+  <ng-template [ngIf]="!serverName || !serverHost || !serverPort" [ngIfElse]="servCreated">
+    <p class="alert alert-danger">Please correct errors!</p>
+  </ng-template>
+  <ng-template #servCreated>
+    <ng-template [ngIf]="serverCreated && !mouseOver" [ngIfElse]="mOver">
+      <p class="alert alert-success">Server was created! Server name is {{ this.serverName }}</p>
+    </ng-template>
+  </ng-template>
+  <ng-template #mOver>
+    <ng-template [ngIf]="mouseOver" [ngIfElse]="noServer">
+      <p class="alert alert-info">Are you sure you can create Server with name: {{ this.serverName }} ?</p>
+    </ng-template>
+  </ng-template>
+  <ng-template #noServer>
+  <p class="alert alert-info">No server was created!</p>
+  </ng-template>
   <app-server></app-server>
   <app-server></app-server>
 </html>

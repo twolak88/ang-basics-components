@@ -15,8 +15,8 @@ export class ServersComponent implements OnInit {
   readonly DEFAULT_PORT = '8080';
   
   allowNewServer = false;
-  serverCreationStatus = 'No server was created!';
   serverCreated = false;
+  mouseOver = false;
   serverName = this.DEFAULT_NAME;
   serverHost = this.DEFAULT_HOST;
   serverPort = this.DEFAULT_PORT;
@@ -31,33 +31,43 @@ export class ServersComponent implements OnInit {
   }
   
   onCreateServer() {
-    this.serverCreationStatus = 'Server was created! Server name is ' + this.serverName;
     this.serverCreated = true;
     this.allowNewServer = false;
-    //console.log("Server Created: " + this.serverCreated);
+    this.mouseOver = false;
   }
   
-  onMouseOver() {
-    this.serverCreationStatus = 'Are you sure you can create Server with name: ' + this.serverName + '?';
+  /*onMouseOver() {
+    this.mouseOver = true;
   }
   
   onMouseOut() {
-    if (!this.serverCreated) {
-      this.serverCreationStatus = "No server was created!";
-    } else {
-      this.serverCreationStatus = "Server was created! Server name is " + this.serverName;
-    }
-  }
+    this.mouseOver = false;
+  }*/
   
-  onUpdateServerName(event: Event){
-    console.log(event);
+  /*onUpdateServerName(event: Event){
     this.serverName = (<HTMLInputElement>event.target).value;
+  }*/
+  
+  isSetDefaultsEnabled() {
+    return !this.allowNewServer || 
+      (this.serverName == this.DEFAULT_NAME 
+        && this.serverHost == this.DEFAULT_HOST 
+        && this.serverPort == this.DEFAULT_PORT)
   }
   
-  resetControls() {
+  setDefaults() {
     this.serverName = this.DEFAULT_NAME;
     this.serverHost = this.DEFAULT_HOST;
     this.serverPort = this.DEFAULT_PORT;
   }
- 
+  
+  isClearEnabled() {
+    return !this.allowNewServer || !this.serverName && !this.serverHost && !this.serverPort;
+  }
+  
+  clearControls() {
+    this.serverName = '';
+    this.serverHost = '';
+    this.serverPort = '';
+  }
 }
