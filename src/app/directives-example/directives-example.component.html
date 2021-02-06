@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <button class="btn btn-primary" 
+          (click)="changeState()">Change Visibility</button>
+  <p class="alert alert-info" *ngIf="isHiddenDisplayed">Hidden text</p>
+  <p *ngFor="let changeItem of changes; let i = index"
+     [ngStyle]="{'background-color': i >= 4 ? 'blue' : 'transparent'}"
+     [ngClass]="{'white-text': i >= 4}"
+     >{{changeItem.toLocaleString()}}</p>
+</html>
