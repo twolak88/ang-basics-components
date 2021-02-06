@@ -20,6 +20,7 @@ export class ServersComponent implements OnInit {
   serverName = this.DEFAULT_NAME;
   serverHost = this.DEFAULT_HOST;
   serverPort = this.DEFAULT_PORT;
+  servers = ['Testserver', 'Testserver 2'];
   
   constructor() {
     setTimeout(()=> {
@@ -32,7 +33,8 @@ export class ServersComponent implements OnInit {
   
   onCreateServer() {
     this.serverCreated = true;
-    this.allowNewServer = false;
+    this.servers.push(this.serverName);
+    //this.allowNewServer = false;
     this.mouseOver = false;
   }
   
