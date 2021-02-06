@@ -1,5 +1,41 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <label>Server name:</label>
+<!--  <input
+    type="test"
+    value="{{serverName}}"
+    class="form-control"
+    (input)="onUpdateServerName($event)"/>-->
+  <input
+    type="test"
+    class="form-control"
+    [(ngModel)]="serverName"
+    [disabled]="!allowNewServer"/>
+  <input
+    type="test"
+    class="form-control"
+    [(ngModel)]="serverHost"
+    [disabled]="!allowNewServer"/>
+  <input
+    type="test"
+    class="form-control"
+    [(ngModel)]="serverPort"
+    [disabled]="!allowNewServer"/>
+  <!--<p>Current name: {{ serverName }}</p>-->
+  <button class="btn btn-primary" 
+          [disabled]="!allowNewServer || !serverName || !serverHost || !serverPort"
+          (click)="onCreateServer()"
+          (mouseover)="onMouseOver()"
+          (mouseout)="onMouseOut()">Add Server</button>
+  <button class="btn btn-primary"
+          (click)="resetControls()"
+          [disabled]="!allowNewServer || (serverName === DEFAULT_NAME && serverHost == DEFAULT_HOST && serverPort == DEFAULT_PORT)">
+    Reset</button>
+  <button class="btn btn-primary" 
+          [disabled]="!allowNewServer || !serverName && !serverHost && !serverPort"
+          (click)="serverName = serverHost = serverPort = ''">Clear</button>
+  <!--<p [innerText]="allowNewServer">allowNewServer</p>-->
+  <p>{{ serverCreationStatus }}</p>
   <app-server></app-server>
   <app-server></app-server>
 </html>
