@@ -1,4 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <p [ngStyle]="{'background-color': getColor(), border: 'solid 2px', borderColor: 'darkblue'}">{{ 'Server' }} with ID {{ serverId }} is {{ getServerStatus() }}</p>
+  <p 
+    [ngStyle]="{'background-color': getColor(), border: 'solid 2px', borderColor: 'darkblue'}"
+    [ngClass]="{online: isOnline(), offline: !isOnline()}">
+    {{ 'Server' }} with ID {{ serverId }} is {{ getServerStatusString() }}</p>
 </html>
